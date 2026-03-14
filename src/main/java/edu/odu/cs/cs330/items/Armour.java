@@ -43,6 +43,14 @@ public class Armour extends Equippable {
     public Armour(Armour src)
     {
         // Complete this function.
+        super(src.getName());
+
+        this.durability = src.durability;
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modifierLevel = src.modifierLevel;
+        this.element = src.element;
+        this.defense = src.defense;
     }
 
     /**
@@ -80,6 +88,12 @@ public class Armour extends Equippable {
         super.name    = snr.next();
 
         // Complete this function.
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.defense = snr.nextInt();
+        this.modifier = snr.next();
+        this.modifierLevel = snr.nextInt();
+        this.element = snr.next();
     }
 
     /**
@@ -88,7 +102,7 @@ public class Armour extends Equippable {
     @Override
     public Item clone()
     {
-        Armour cpy = new Armour();
+        Armour cpy = new Armour(this);
 
         // Complete this function.
 
@@ -112,7 +126,10 @@ public class Armour extends Equippable {
 
         // Complete this function.
         // Remove the placeholder return
-        return false;
+        return this.name.equals(rhsItem.name)
+            && this.material.equals(rhsItem.material)
+            && this.modifier.equals(rhsItem.modifier)
+            && this.element.equals(rhsItem.element);
     }
 
     /**
@@ -124,7 +141,10 @@ public class Armour extends Equippable {
     {
         // Complete this function.
         // Remove the placeholder return
-        return -1;
+        return this.name.hashCode()
+            + this.material.hashCode()
+            + this.modifier.hashCode()
+            + this.element.hashCode();
     }
 
     /**
@@ -138,6 +158,11 @@ public class Armour extends Equippable {
         return String.join(
             System.lineSeparator(),
             String.format("  Nme: %s", super.getName()),
+            String.format("  Dur: %d", this.durability),
+            String.format("  Def: %d", this.defense),
+            String.format("  Mtl: %s", this.material),
+            String.format("  Mdr: %s (Lvl %s)", this.modifier, this.modifierLevel),
+            String.format("  Emt: %s", this.element),
             ""
         );
     }
